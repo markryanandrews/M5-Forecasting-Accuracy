@@ -42,7 +42,7 @@ def clean_sales(dataf):
     return dataf
 
 @log_frame
-def build_sales(item_name, sales_df, calendar_df):
+def filter_item(item_name, sales_df, calendar_df):
     """ 
     Function: Combines Walmart Item Sales. 
       
@@ -60,5 +60,11 @@ def build_sales(item_name, sales_df, calendar_df):
     
     # merge sales with calendar data
     dataf =  pd.merge(left = dataf , right = calendar_df, left_index = True, right_on = 'd')
-    
     return dataf.drop(columns = ['d'])
+
+@log_frame
+def item_sales(item_name, sales_df, calendar_df):
+    item_sale_df = filter_item(item_name, sales_df, calendar_df)
+    return item_sale_df.iloc[:,:1]
+    
+
